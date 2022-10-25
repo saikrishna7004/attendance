@@ -9,6 +9,7 @@ import { config, library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 import cookie from 'js-cookie'
+import ContentLoader, { Facebook } from 'react-content-loader'
 
 library.add(faCircle, faCircleCheck, faCircleXmark)
 config.familyPrefix = "far"
@@ -75,10 +76,12 @@ const Attendance = (d) => {
 }
 
 const Card = (p) => {
-	return <div className="info my-4 p-3 rounded-4 border border-secondary border-opacity-75" style={{boxShadow: '1px 2px 3px 4px rgb(12 12 12 / 20%)'}}>
-	{p.data && p.data.hallticketno && <Details data={p.data} />}
-	{p.attData && <Attendance data={p.attData} />}
-</div>
+	return p.loading?<div className="info my-4 p-3 rounded-4 border border-secondary border-opacity-75" style={{boxShadow: '1px 2px 3px 4px rgb(12 12 12 / 20%)'}}>
+		<ContentLoader/>
+	</div>:(p.data && p.attData && <div className="info my-4 p-3 rounded-4 border border-secondary border-opacity-75" style={{boxShadow: '1px 2px 3px 4px rgb(12 12 12 / 20%)'}}>
+		{p.data && p.data.hallticketno && <Details data={p.data} />}
+		{p.attData && <Attendance data={p.attData} />}
+	</div>)
 }
 
 const Loading = () => {
@@ -93,6 +96,7 @@ const Loading = () => {
 export default function Home(props) {
 	const [roll, setRoll] = useState(props.attendanceRollno?props.attendanceRollno:2421239)
 	const [data, setData] = useState(null)
+	const [loading, setLoading] = useState(false)
 	const [attData, setAttData] = useState(null)
 	useEffect(() => {
 		function getCookie(cname) {
@@ -135,6 +139,8 @@ export default function Home(props) {
 			text: 'Roll No. cannot be empty',
 		})
 
+		setLoading(true)
+
 		fetch("/api/m32", {
 			method: 'POST',
 			headers: {
@@ -145,6 +151,7 @@ export default function Home(props) {
 				"rollno": roll
 			})
 		}).then((res) => res.json()).then((data) => {
+			setLoading(false)
 			if(data.error) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -160,6 +167,7 @@ export default function Home(props) {
 				setData(data)
 			}
 		}).catch((e)=>{
+			setLoading(false)
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -177,6 +185,7 @@ export default function Home(props) {
 				"rollno": roll
 			})
 		}).then((res) => res.json()).then((data) => {
+			setLoading(false)
 			if(data.error || !data.overallattperformance) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -187,6 +196,7 @@ export default function Home(props) {
 				setAttData(data)
 			}
 		}).catch((e)=>{
+			setLoading(false)
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -199,13 +209,13 @@ export default function Home(props) {
 		<>
 			<Script src="sweetalert2/sweetalert2.min.js"></Script>
 			<div className="container">
-				<div className="my-3 d-sm-flex">
-					<label htmlFor="rollno" className="form-label col-sm-1 mt-2">Roll No.</label>
-					<input type="text" onChange={handleInputChange} className="form-control w-auto col-sm-6 me-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event)=>{if (event.keyCode == 13) {getAttendance()}}} />
-					<button className="btn btn-primary me-2" style={{marginBottom: '1px'}} onClick={getAttendance}>Fetch</button>
-					<button className="btn btn-primary me-2" style={{marginBottom: '1px'}} onClick={()=>{cookie.set('attendance-rollno', roll, {expires: 10})}}>Remember Me</button>
+				<div className="mb-3 mt-1 d-sm-flex">
+					<label htmlFor="rollno" className="form-label col-auto mt-3 me-2">Roll No.</label>
+					<input type="text" onChange={handleInputChange} className="form-control w-auto col-sm-6 me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event)=>{if (event.keyCode == 13) {getAttendance()}}} />
+					<button className="btn btn-primary me-2 mt-2" style={{marginBottom: '1px'}} onClick={getAttendance}>Fetch</button>
+					<button className="btn btn-primary me-2 mt-2" style={{marginBottom: '1px'}} onClick={()=>{cookie.set('attendance-rollno', roll, {expires: 10})}}>Remember Me</button>
 				</div>
-				{data && attData && <Card data={data} attData={attData} />}
+				<Card data={data} attData={attData} loading={loading} />
 			</div>
 		</>
 	)

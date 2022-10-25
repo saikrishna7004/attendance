@@ -24,3 +24,6 @@ a {
     background: black;
   }
 }
+meter::-webkit-meter-bar {
+  background: #e6e6e9;
+}
