@@ -28,9 +28,9 @@ function MyApp({ Component, pageProps }) {
 			</div>
 			<div className="footer-left">
 				<p className="footer-links">
-					<a className="link-1" href="#">My Sites</a>
+					<a className="link-1" target="_blank" href="https://saikrishna.epizy.com/mysites/">My Sites</a>
 				</p>
-				<p>Sai Krishna &copy; 2022</p>
+				<p>Karnati Sai Krishna &copy; 2022</p>
 			</div>
 		</footer>
 	</>
