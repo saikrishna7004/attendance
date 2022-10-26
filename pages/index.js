@@ -76,9 +76,9 @@ const Attendance = (d) => {
 }
 
 const Card = (p) => {
-	return p.loading?<div className="info my-4 p-3 rounded-4 border border-secondary border-opacity-75" style={{boxShadow: '1px 2px 3px 4px rgb(12 12 12 / 20%)'}}>
+	return p.loading?<div className="info my-4 p-3 rounded-4 border border-secondary border-opacity-75" style={{boxShadow: '1px 2px 3px 4px rgb(12 12 12 / 20%)', maxWidth: '700px'}}>
 		<ContentLoader/>
-	</div>:(p.data && p.attData && <div className="info my-4 p-3 rounded-4 border border-secondary border-opacity-75" style={{boxShadow: '1px 2px 3px 4px rgb(12 12 12 / 20%)'}}>
+	</div>:(p.data && p.attData && <div className="info my-4 p-3 rounded-4 border border-secondary border-opacity-75" style={{boxShadow: '1px 2px 3px 4px rgb(12 12 12 / 20%)', maxWidth: '700px'}}>
 		{p.data && p.data.hallticketno && <Details data={p.data} />}
 		{p.attData && <Attendance data={p.attData} />}
 	</div>)
