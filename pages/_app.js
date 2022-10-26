@@ -11,7 +11,7 @@ config.familyPrefix = "fa"
 function MyApp({ Component, pageProps }) {
 	return <>
 		<Head>
-			<title>Attendance by Sai</title>
+			<title>KMIT Astra - Attendance Tracker </title>
 			<meta name='description' content='An application to track your attendance for KMITians without Netra or Sanjaya' />
 			<meta property="og:image" content="/logo.png" />
 		</Head>
