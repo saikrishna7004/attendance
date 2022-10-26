@@ -8,7 +8,7 @@ export default async function handler(req, res) {
         try {
             await connectMongo();
             console.log('CONNECTED TO MONGO');
-            var roll = await Netra.findOne({rollno: req.body.rollno.toUpperCase()});
+            var roll = await Netra.findOne({rollno: req.body.rollno.toLocaleString().toUpperCase()});
         } catch (error) {
             console.log(error);
         }
