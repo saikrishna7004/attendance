@@ -12,7 +12,8 @@ function MyApp({ Component, pageProps }) {
 	return <>
 		<Head>
 			<title>Attendance by Sai</title>
-			<meta name='description' content='An application to track your application for KMITians without Netra or Sanjaya' />
+			<meta name='description' content='An application to track your attendance for KMITians without Netra or Sanjaya' />
+			<meta property="og:image" content="/logo.png" />
 		</Head>
 		<Script src="sweetalert2/sweetalert2.min.js"></Script>
 		<div style={{ background: 'rgb(230, 230, 230)' }} className="mb-2 py-2 d-flex justify-content-center">
