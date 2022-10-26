@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
 		<Script src="sweetalert2/sweetalert2.min.js"></Script>
 		<div style={{ background: 'rgb(230, 230, 230)' }} className="mb-2 py-2 d-flex justify-content-center">
 			<img src="/logo.png" alt="Logo" style={{ height: '50px' }} />
-			<h1 className='mb-0'>Astra</h1>
+			<h2 className='mt-2 ms-1'>KMIT Astra</h2>
 		</div>
 		<Component {...pageProps} />
 		<footer className="footer-distributed mt-4">
