@@ -72,8 +72,8 @@ const Netra = () => {
                 ...info
 			})
 		}).then((res) => res.json()).then((data) => {
-            // console.log(data.error)
-			if(data.error.code==11000) {
+            // console.log(data)
+			if(data.error && data.error.code==11000) {
                 let a
                 if(data.error.keyValue.rollno) a = "Roll No.";
                 else if(data.error.keyValue.netra) a = "Netra ID";
@@ -87,6 +87,11 @@ const Netra = () => {
 				icon: 'error',
 				title: 'Oops...',
 				text: 'Something went wrong!',
+			})
+            else if(data.netra) return Swal.fire({
+				icon: 'success',
+				title: 'Success',
+				text: 'Roll No. added Successfully',
 			})
 			else {
 				console.log(data)
