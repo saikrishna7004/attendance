@@ -11,6 +11,18 @@ const netraSchema = new Schema({
         required: true,
         unique: true,
     },
+    class: {
+        type: String,
+        required: true,
+    },
+    year: {
+        type: Number,
+        required: true,
+    },
+    section: {
+        type: String,
+        required: true,
+    }
 });
 
 const Netra = models.Netra || model('Netra', netraSchema);

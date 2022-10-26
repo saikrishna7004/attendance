@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 import cookie from 'js-cookie'
 import ContentLoader, { Facebook } from 'react-content-loader'
+import Link from 'next/link'
 
 library.add(faCircle, faCircleCheck, faCircleXmark)
 config.familyPrefix = "far"
@@ -213,13 +214,14 @@ export default function Home(props) {
 			</Head>
 			<Script src="sweetalert2/sweetalert2.min.js"></Script>
 			<div className="container">
-				<div className="mb-3 mt-1 d-sm-flex">
+				<div className="mb-3 mt-1 d-flex" style={{flexFlow: 'wrap'}}>
 					<label htmlFor="rollno" className="form-label col-auto mt-3 me-2">Roll No.</label>
-					<input type="text" onChange={handleInputChange} className="form-control w-auto col-sm-6 me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event)=>{if (event.keyCode == 13) {getAttendance()}}} />
+					<input type="text" onChange={handleInputChange} className="form-control w-auto col-auto me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event)=>{if (event.keyCode == 13) {getAttendance()}}} />
 					<button className="btn btn-primary me-2 mt-2" style={{marginBottom: '1px'}} onClick={getAttendance}>Fetch</button>
 					<button className="btn btn-primary me-2 mt-2" style={{marginBottom: '1px'}} onClick={()=>{cookie.set('attendance-rollno', roll, {expires: 10})}}>Remember Me</button>
 				</div>
 				<Card data={data} attData={attData} loading={loading} />
+				Add your Roll No. <Link href='/netra'><a>Here</a></Link> for ease
 			</div>
 		</>
 	)
