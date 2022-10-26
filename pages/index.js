@@ -207,6 +207,10 @@ export default function Home(props) {
 
 	return (
 		<>
+			<Head>
+				<title>Attendance by Sai</title>
+				<meta name='description' content='An application to track your application for KMITians without Netra or Sanjaya' />
+			</Head>
 			<Script src="sweetalert2/sweetalert2.min.js"></Script>
 			<div className="container">
 				<div className="mb-3 mt-1 d-sm-flex">
