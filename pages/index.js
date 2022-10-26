@@ -49,6 +49,7 @@ const Details = (d) => {
 }
 
 const Attendance = (d) => {
+	console.log(d)
 	if (d.data.error || !d.data.overallattperformance) {
 		Swal.fire({
 			icon: 'error',
@@ -73,6 +74,29 @@ const Attendance = (d) => {
 			})
 		}
 		{(d.data.attandance.dayobjects.length <= 1) && "No records"}
+		<h3 className="my-3">Subject Wise</h3>
+		{d.data.overallattperformance.overall.length>0 ? <table class="table table-hover container my-3">
+			<thead>
+				<tr>
+					<th scope="col">Subject</th>
+					<th scope="col">Percentage</th>
+				</tr>
+			</thead>
+			<tbody id="subject_wise_att">
+				{
+					d.data.overallattperformance.overall.map((e, i) => {
+						return <tr key={i}>
+							<td>{e.subjectname}</td>
+							<td style={{color: (e.colorcode1?e.colorcode1:e.colorcode2)}}>{(e.percentage!='--')?e.percentage:e.practical}</td>
+						</tr>
+					})
+				}
+				<tr key={100}>
+					<td><b>Overall</b></td>
+					<td style={{color: d.data.overallattperformance.colorcode}}>{d.data.overallattperformance.totalpercentage}</td>
+				</tr>
+			</tbody>
+		</table> : 'No records found'}
 	</div>
 }
 
