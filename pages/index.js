@@ -163,7 +163,7 @@ export default function Home(props) {
 				text: 'Incorrect Roll No.',
 			})
 			else {
-				console.log(data)
+				// console.log(data)
 				setData(data)
 			}
 		}).catch((e)=>{
@@ -192,7 +192,7 @@ export default function Home(props) {
 				text: 'Something went wrong!',
 			})
 			else {
-				console.log(data)
+				// console.log(data)
 				setAttData(data)
 			}
 		}).catch((e)=>{
