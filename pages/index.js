@@ -28,6 +28,7 @@ function DayAtt({ day }) {
 }
 
 const Details = (d) => {
+	console.log(d)
 	if (d.data.error) {
 		Swal.fire({
 			icon: 'error',
@@ -38,7 +39,7 @@ const Details = (d) => {
 	}
 	return <div className="d-flex flex-md-row flex-column-reverse my-2">
 		<div className="col-md-2">
-			<img style={{ height: '100px' }} src={!(d.data.picture == 'http://teleuniv.in/sanjaya/student-images/') ? d.data.picture : 'https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3-800x800.png'} />
+			<img style={{ height: '100px' }} src={!(d.data.picture == 'http://teleuniv.in/sanjaya/student-images/') ? 'https://images.weserv.nl/?url='+d.data.picture : 'https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3-800x800.png'} />
 		</div>
 		<div className="col-md-9">
 			<h2>{d.data.firstname}</h2>
