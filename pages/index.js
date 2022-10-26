@@ -115,13 +115,6 @@ export default function Home(props) {
 			}
 			return "";
 		}
-		function setCookie(cname, cvalue, exdays) {
-			const d = new Date();
-			d.setTime(d.getTime() + (exdays*24*60*60*1000));
-			let expires = "expires="+ d.toUTCString();
-			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-			return true
-		}
 		let c = getCookie('attendance-rollno')
 		if(c) {
 			setRoll(c)
@@ -218,7 +211,7 @@ export default function Home(props) {
 					<label htmlFor="rollno" className="form-label col-auto mt-3 me-2">Roll No.</label>
 					<input type="text" onChange={handleInputChange} className="form-control w-auto col-auto me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event)=>{if (event.keyCode == 13) {getAttendance()}}} />
 					<button className="btn btn-primary me-2 mt-2" style={{marginBottom: '1px'}} onClick={getAttendance}>Fetch</button>
-					<button className="btn btn-primary me-2 mt-2" style={{marginBottom: '1px'}} onClick={()=>{cookie.set('attendance-rollno', roll, {expires: 10})}}>Remember Me</button>
+					<button className="btn btn-primary me-2 mt-2" style={{marginBottom: '1px'}} onClick={()=>{cookie.set('attendance-rollno', roll, {expires: 300})}}>Remember Me</button>
 				</div>
 				<Card data={data} attData={attData} loading={loading} />
 				Add your Roll No. <Link href='/netra'><a>Here</a></Link> for ease
