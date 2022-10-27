@@ -39,7 +39,7 @@ const Details = (d) => {
 	}
 	return <div className="d-flex flex-md-row flex-column-reverse my-2">
 		<div className="col-md-2">
-			<img style={{ height: '100px' }} src={!(d.data.picture == 'http://teleuniv.in/sanjaya/student-images/') ? 'https://images.weserv.nl/?url='+d.data.picture : 'https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3-800x800.png'} />
+			<img style={{ height: '100px' }} src={!(d.data.picture == 'http://teleuniv.in/sanjaya/student-images/') ? 'https://images.weserv.nl/?url=' + d.data.picture : 'https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3-800x800.png'} />
 		</div>
 		<div className="col-md-9">
 			<h2>{d.data.firstname}</h2>
@@ -68,6 +68,21 @@ const Attendance = (d) => {
 			<span className="col-7"><DayAtt day={d.data.attandance.dayobjects[0].sessions} /></span>
 		</div>
 		<h3 className="my-3">Last 2 Weeks</h3>
+		<table class="my-3" style={{width: '100%'}}>
+			<tbody>
+				<tr>
+					<td style={{textAlign: 'right'}}><Circle num='1' /></td>
+					<td>{d.data.attandance.twoweeksessions.present}</td>
+					<td style={{textAlign: 'right'}}><Circle num='0' /></td>
+					<td>{d.data.attandance.twoweeksessions.absent}</td>
+					<td style={{textAlign: 'right'}}><Circle num='2' /></td>
+					<td>{d.data.attandance.twoweeksessions.nosessions}</td>
+				</tr>
+			</tbody>
+		</table>
+		{
+
+		}
 		{
 			d.data.attandance.dayobjects.map((e, i) => {
 				if (i == 0) return <div key={i}></div>
@@ -76,7 +91,7 @@ const Attendance = (d) => {
 		}
 		{(d.data.attandance.dayobjects.length <= 1) && "No records"}
 		<h3 className="my-3">Subject Wise</h3>
-		{d.data.overallattperformance.overall.length>0 ? <table class="table table-hover container my-3">
+		{d.data.overallattperformance.overall.length > 0 ? <table class="table table-hover container my-3">
 			<thead>
 				<tr>
 					<th scope="col">Subject</th>
@@ -88,13 +103,13 @@ const Attendance = (d) => {
 					d.data.overallattperformance.overall.map((e, i) => {
 						return <tr key={i}>
 							<td>{e.subjectname}</td>
-							<td style={{color: (e.colorcode1?e.colorcode1:e.colorcode2)}}>{(e.percentage!='--')?e.percentage:e.practical}</td>
+							<td style={{ color: (e.colorcode1 ? e.colorcode1 : e.colorcode2) }}>{(e.percentage != '--') ? e.percentage : e.practical}</td>
 						</tr>
 					})
 				}
 				<tr key={100}>
 					<td><b>Overall</b></td>
-					<td style={{color: d.data.overallattperformance.colorcode}}>{d.data.overallattperformance.totalpercentage}</td>
+					<td style={{ color: d.data.overallattperformance.colorcode }}>{d.data.overallattperformance.totalpercentage}</td>
 				</tr>
 			</tbody>
 		</table> : 'No records found'}
