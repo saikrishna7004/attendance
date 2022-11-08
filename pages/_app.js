@@ -4,6 +4,8 @@ import '../styles/globals.css'
 import { config, library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faInstagram, faLinkedin, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
+import 'bootstrap/dist/css/bootstrap.css'
+import Link from 'next/link'
 
 library.add(faGithub, faInstagram, faLinkedin)
 config.familyPrefix = "fa"
@@ -16,10 +18,14 @@ function MyApp({ Component, pageProps }) {
 			<meta property="og:image" content="/logo.png" />
 		</Head>
 		<Script src="sweetalert2/sweetalert2.min.js"></Script>
-		<div style={{ background: 'rgb(230, 230, 230)' }} className="mb-2 py-2 d-flex justify-content-center">
-			<img src="/logo.png" alt="Logo" style={{ height: '50px' }} />
-			<h2 className='mt-2 ms-1'>KMIT Astra</h2>
-		</div>
+		<Link href="/" >
+			<a style={{textDecoration: 'none'}}>
+				<div style={{ background: 'rgb(230, 230, 230)' }} className="mb-2 py-2 d-flex justify-content-center">
+					<img src="/logo.png" alt="Logo" style={{ height: '50px' }} />
+					<h2 className='mt-2 ms-1 text-dark'>KMIT Astra</h2>
+				</div>
+			</a>
+		</Link>
 		<Component {...pageProps} />
 		<footer className="footer-distributed mt-4">
 			<div className="footer-right">
