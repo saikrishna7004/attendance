@@ -16,7 +16,7 @@ const Netra = () => {
 	const [sectionList, setSectionList] = useState([{value: '', text: '--Select--'}])
 
 	const handleInputChange = (e) => {
-        if(e.target.name=='rollno') e.target.value=e.target.value.toUpperCase()
+        if(e.target.name=='rollno') e.target.value=e.target.value.toUpperCase().trim()
         setInfo({
             ...info,
             [e.target.name]: e.target.value,

@@ -163,7 +163,7 @@ export default function Home(props) {
 	}, [])
 
 	const handleInputChange = (e) => {
-		setRoll(e.target.value.toUpperCase())
+		setRoll(e.target.value.toUpperCase().trim())
 	}
 
 	function getAttendance() {
