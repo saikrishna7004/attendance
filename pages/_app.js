@@ -5,6 +5,7 @@ import { config, library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faInstagram, faLinkedin, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/js/src/modal'
 import Link from 'next/link'
 
 library.add(faGithub, faInstagram, faLinkedin)
