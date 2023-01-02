@@ -68,7 +68,7 @@ const Attendance = (d) => {
 			<span className="col-7"><DayAtt day={d.data.attandance.dayobjects[0].sessions} /></span>
 		</div>
 		<h3 className="my-3">Last 2 Weeks</h3>
-		<table class="my-3" style={{width: '100%'}}>
+		<table className="my-3" style={{width: '100%'}}>
 			<tbody>
 				<tr>
 					<td style={{textAlign: 'right'}}><Circle num='1' /></td>
@@ -91,7 +91,7 @@ const Attendance = (d) => {
 		}
 		{(d.data.attandance.dayobjects.length <= 1) && "No records"}
 		<h3 className="my-3">Subject Wise</h3>
-		{d.data.overallattperformance.overall.length > 0 ? <table class="table table-hover container my-3">
+		{d.data.overallattperformance.overall.length > 0 ? <table className="table table-hover container my-3">
 			<thead>
 				<tr>
 					<th scope="col">Subject</th>
@@ -139,6 +139,28 @@ export default function Home(props) {
 	const [data, setData] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [attData, setAttData] = useState(null)
+	useEffect(() => {
+		function getCookie(cname) {
+			let name = cname + "=";
+			let decodedCookie = decodeURIComponent(document.cookie);
+			let ca = decodedCookie.split(';');
+			for (let i = 0; i < ca.length; i++) {
+				let c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length, c.length);
+				}
+			}
+			return "";
+		}
+		let c = getCookie('attendance-rollno')
+		if (c) {
+			setRoll(c.toUpperCase())
+			getAttendance()
+		}
+	}, [])
 
 	const handleInputChange = (e) => {
 		setRoll(e.target.value.toUpperCase().trim())
@@ -224,8 +246,14 @@ export default function Home(props) {
 	return (
 		<>
 			<div className="container">
-				Astra is facing issues, please check back in a Day or two. thankyou for using KMIT Astra 1.0
-				Contact me through my instagram handle for any details
+				<div className="mb-3 mt-1 d-flex" style={{ flexFlow: 'wrap' }}>
+					<label htmlFor="rollno" className="form-label col-auto mt-3 me-2">Roll No.</label>
+					<input type="text" onChange={handleInputChange} style={{ textTransform: 'capitalize' }} className="form-control w-auto col-auto me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event) => { if (event.keyCode == 13) { getAttendance() } }} />
+					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={getAttendance}>Fetch</button>
+					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={() => { cookie.set('attendance-rollno', roll, { expires: 300 }) }}>Remember Me</button>
+				</div>
+				<Card data={data} attData={attData} loading={loading} />
+				Add your Roll No. <Link href='/netra'><a>Here</a></Link> if your Roll No. is not there
 			</div>
 		</>
 	)
