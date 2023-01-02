@@ -223,22 +223,22 @@ export default function Home(props) {
 					<input type="text" onChange={handleInputChange} style={{ textTransform: 'capitalize' }} className="form-control w-auto col-auto me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event) => { if (event.keyCode == 13) { getAttendance() } }} />
 					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={getAttendance}>Fetch</button>
 					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={() => { cookie.set('attendance-rollno', roll, { expires: 300 }) }}>Remember Me</button>
-					<button class="btn btn-primary me-2 mt-2" data-bs-toggle="modal" data-bs-target="#notice">Notice</button>
+					<button className="btn btn-primary me-2 mt-2" data-bs-toggle="modal" data-bs-target="#notice">Notice</button>
 				</div>
 				<Card data={data} attData={attData} loading={loading} />
 				Add your Roll No. <Link href='/netra'><a>Here</a></Link> if your Roll No. is not there
-				<div class="modal fade w-10" id="notice" tabindex="-1" aria-hidden="true">
-					<div class="modal-dialog modal-xl modal-dialog-scrollable">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h1 class="modal-title fs-5" id="exampleModalLabel">Notice</h1>
-								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<div className="modal fade w-10" id="notice" tabIndex="-1" aria-hidden="true">
+					<div className="modal-dialog modal-xl modal-dialog-scrollable">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h1 className="modal-title fs-5" id="exampleModalLabel">Notice</h1>
+								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
-							<div class="modal-body">
-								Please don't flood the app. The app is experiencing lot of requests at a time, which sometimes may result in throwing errors. Please try again later if you get any error.
+							<div className="modal-body">
+								Please don&apos;t flood the app. The app is experiencing lot of requests at a time, which sometimes may result in throwing errors. Please try again later if you get any error.
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<div className="modal-footer">
+								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
