@@ -9,8 +9,11 @@ const feedbackSchema = new Schema({
     },
     name: {
         type: String
+    },
+    phone: {
+        type: String
     }
-});
+}, { timestamps: true });
 
 const Feedback = models.Feedback || model('Feedback', feedbackSchema);
 

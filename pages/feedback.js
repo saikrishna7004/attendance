@@ -9,7 +9,8 @@ const Feedback = () => {
 	const [info, setInfo] = useState({
         rollno: "",
         feedback: "",
-        name: ""
+        name: "",
+        phone: ""
     })
 	const handleInputChange = (e) => {
         if(e.target.name=='rollno') e.target.value=e.target.value.toUpperCase().trim()
@@ -20,7 +21,8 @@ const Feedback = () => {
 	}
 
     const handleSubmit = () => {
-        if(!info.rollno || !info.feedback ){
+        console.log(info)
+        if(!info.rollno || !info.feedback || !info.name || !info.phone){
             return Swal.fire({
                 icon: 'error',
                 title: 'Empty Field',
@@ -69,6 +71,11 @@ const Feedback = () => {
 				<div className="mb-3 mt-1 d-sm-flex">
 					<label htmlFor="name" className="form-label col-auto col-sm-2 mt-3 me-2">Your Name</label>
 					<input type="text" onChange={handleInputChange} style={{textTransform: 'capitalize'}} className="form-control w-auto col-sm-6 me-2 mt-2" id="name" name="name" placeholder="Name" value={info.name} onKeyUp={(event)=>{if (event.keyCode == 13) {handleSubmit()}}} />
+				</div>
+
+				<div className="mb-3 mt-1 d-sm-flex">
+					<label htmlFor="phone" className="form-label col-auto col-sm-2 mt-3 me-2">Phone No.</label>
+					<input type="number" minLength={9} onChange={handleInputChange} className="form-control w-auto col-sm-6 me-2 mt-2" id="phone" name="phone" placeholder="Phone Number" value={info.phone} onKeyUp={(event)=>{if (event.keyCode == 13) {handleSubmit()}}} />
 				</div>
                 
 				<div className="mb-3 mt-1 d-sm-flex">

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import Feedback from '../../models/feedback';
 
-const connectMongo = async () => mongoose.connect(process.env.MONGO_URI);
+const connectMongo = async () => mongoose.connect(process.env.MONGODB_URI);
 connectMongo()
 
 export default async function handler(req, res) {
