@@ -191,7 +191,7 @@ export default function Home(props) {
 				title: 'Oops...',
 				text: 'Something went wrong!',
 			})
-			else if (!data.hallticketno) {
+			else if (!data.m32.hallticketno) {
 				setData(null)
 				setAttData(null)
 				return Swal.fire({
@@ -201,7 +201,7 @@ export default function Home(props) {
 				})
 			}
 			else {
-				// console.log(data)
+				console.log(data)
 				setData(data.m32)
 				setAttData(data.m314)
 			}
