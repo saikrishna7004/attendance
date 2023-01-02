@@ -224,6 +224,7 @@ export default function Home(props) {
 					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={getAttendance}>Fetch</button>
 					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={() => { cookie.set('attendance-rollno', roll, { expires: 300 }) }}>Remember Me</button>
 					<button className="btn btn-primary me-2 mt-2" data-bs-toggle="modal" data-bs-target="#notice">Notice</button>
+					<Link href='/feedback'><a className="btn btn-primary me-2 mt-2">Feedback</a></Link>
 				</div>
 				<Card data={data} attData={attData} loading={loading} />
 				Add your Roll No. <Link href='/netra'><a>Here</a></Link> if your Roll No. is not there
@@ -231,11 +232,14 @@ export default function Home(props) {
 					<div className="modal-dialog modal-xl modal-dialog-scrollable">
 						<div className="modal-content">
 							<div className="modal-header">
-								<h1 className="modal-title fs-5" id="exampleModalLabel">Notice</h1>
+								<h1 className="modal-title fs-5">Notice</h1>
 								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div className="modal-body">
-								Please don&apos;t flood the app. The app is experiencing lot of requests at a time, which sometimes may result in throwing errors. Please try again later if you get any error.
+								You may experience some errors while using Astra. Please don&apos;t flood the app. 
+								The app is experiencing lot of requests at a time, which sometimes may result in throwing errors. 
+								Please try again later if you get any error.
+								Give your Feedback <div style={{display: "inline"}} data-bs-dismiss="modal"><Link href='/feedback'><a>Here</a></Link></div> if you have any particular issue.
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
