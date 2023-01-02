@@ -5,13 +5,16 @@ import { config, library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faInstagram, faLinkedin, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/js/src/modal'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 library.add(faGithub, faInstagram, faLinkedin)
 config.familyPrefix = "fa"
 
 function MyApp({ Component, pageProps }) {
+	useEffect(() => {
+		import("bootstrap/dist/js/bootstrap.bundle");
+	}, []);
 	return <>
 		<Head>
 			<title>KMIT Astra - Attendance Tracker </title>
