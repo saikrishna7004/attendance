@@ -49,6 +49,11 @@ const Feedback = () => {
             }
 			else {
 				console.log(data)
+                return Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Your Feeback was recieved. Thank you!',
+                })
 			}
 		}).catch((e)=>{
 			Swal.fire({
