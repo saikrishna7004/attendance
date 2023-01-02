@@ -246,14 +246,8 @@ export default function Home(props) {
 	return (
 		<>
 			<div className="container">
-				<div className="mb-3 mt-1 d-flex" style={{ flexFlow: 'wrap' }}>
-					<label htmlFor="rollno" className="form-label col-auto mt-3 me-2">Roll No.</label>
-					<input type="text" onChange={handleInputChange} style={{ textTransform: 'capitalize' }} className="form-control w-auto col-auto me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event) => { if (event.keyCode == 13) { getAttendance() } }} />
-					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={getAttendance}>Fetch</button>
-					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={() => { cookie.set('attendance-rollno', roll, { expires: 300 }) }}>Remember Me</button>
-				</div>
-				<Card data={data} attData={attData} loading={loading} />
-				Add your Roll No. <Link href='/netra'><a>Here</a></Link> if your Roll No. is not there
+				Astra is facing issues, please check back in a Day or two. thankyou for using KMIT Astra 1.0
+				Contact me through my instagram handle for any details
 			</div>
 		</>
 	)
