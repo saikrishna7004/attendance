@@ -175,7 +175,7 @@ export default function Home(props) {
 
 		setLoading(true)
 
-		fetch("/api/m32", {
+		fetch("/api/m_32_314", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json; charset=UTF-8'
@@ -202,36 +202,8 @@ export default function Home(props) {
 			}
 			else {
 				// console.log(data)
-				setData(data)
-			}
-		}).catch((e) => {
-			setLoading(false)
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Something went wrong!',
-			})
-		})
-
-		fetch("/api/m314", {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json; charset=UTF-8'
-			},
-			body: JSON.stringify({
-				// "method": "314",
-				"rollno": roll
-			})
-		}).then((res) => res.json()).then((data) => {
-			setLoading(false)
-			if (data.error || !data.overallattperformance) return Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Something went wrong!',
-			})
-			else {
-				// console.log(data)
-				setAttData(data)
+				setData(data.m32)
+				setAttData(data.m314)
 			}
 		}).catch((e) => {
 			setLoading(false)
