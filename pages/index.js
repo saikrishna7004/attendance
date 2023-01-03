@@ -139,31 +139,31 @@ export default function Home(props) {
 	const [data, setData] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [attData, setAttData] = useState(null)
-	useEffect(() => {
-		function getCookie(cname) {
-			let name = cname + "=";
-			let decodedCookie = decodeURIComponent(document.cookie);
-			let ca = decodedCookie.split(';');
-			for (let i = 0; i < ca.length; i++) {
-				let c = ca[i];
-				while (c.charAt(0) == ' ') {
-					c = c.substring(1);
-				}
-				if (c.indexOf(name) == 0) {
-					return c.substring(name.length, c.length);
-				}
-			}
-			return "";
-		}
-		let c = getCookie('attendance-rollno')
-		if (c) {
-			setRoll(c.toUpperCase())
-			getAttendance()
-		}
-		setTimeout(() => {
-			document.getElementById('noticeBtn').click()
-		}, 1000);
-	}, [])
+	// useEffect(() => {
+	// 	function getCookie(cname) {
+	// 		let name = cname + "=";
+	// 		let decodedCookie = decodeURIComponent(document.cookie);
+	// 		let ca = decodedCookie.split(';');
+	// 		for (let i = 0; i < ca.length; i++) {
+	// 			let c = ca[i];
+	// 			while (c.charAt(0) == ' ') {
+	// 				c = c.substring(1);
+	// 			}
+	// 			if (c.indexOf(name) == 0) {
+	// 				return c.substring(name.length, c.length);
+	// 			}
+	// 		}
+	// 		return "";
+	// 	}
+	// 	let c = getCookie('attendance-rollno')
+	// 	if (c) {
+	// 		setRoll(c.toUpperCase())
+	// 		getAttendance()
+	// 	}
+	// 	setTimeout(() => {
+	// 		document.getElementById('noticeBtn').click()
+	// 	}, 1000);
+	// }, [])
 
 	const handleInputChange = (e) => {
 		setRoll(e.target.value.toUpperCase().trim())
@@ -279,7 +279,7 @@ export default function Home(props) {
 
 	return (
 		<>
-			<div className="container">
+			{/* <div className="container">
 				<div className="mb-3 mt-1 d-flex" style={{ flexFlow: 'wrap' }}>
 					<label htmlFor="rollno" className="form-label col-auto mt-3 me-2">Roll No.</label>
 					<input type="text" onChange={handleInputChange} style={{ textTransform: 'capitalize' }} className="form-control w-auto col-auto me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event) => { if (event.keyCode == 13) { getAttendance() } }} />
@@ -309,7 +309,8 @@ export default function Home(props) {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> */}
+			Work under progress, please check back tomorrow
 		</>
 	)
 }
