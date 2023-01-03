@@ -19,6 +19,7 @@ export default async function handler(req, res) {
                 myRoll = roll.netra
             }
             let start = performance.now()
+            console.log("m32 start", start)
             var result = await fetch("http://teleuniv.in/netra/api.php", {
                 method: 'POST',
                 headers: {
@@ -28,9 +29,13 @@ export default async function handler(req, res) {
                     "method": "32",
                     "rollno": myRoll
                 })
-            }).catch(error => res.status(500).json({ error: 'Internal Server Error', msg: error }))
+            }).catch(error => {
+                console.log("Internal server error", error)
+                return res.status(500).json({ error: 'Internal Server Error', msg: error })
+            })
             var data = await result.json()
             let end = performance.now()
+            console.log("m32 end", end)
             console.log("m32", (end-start)/1000)
             return res.status(200).json(data)
         } catch (error) {
