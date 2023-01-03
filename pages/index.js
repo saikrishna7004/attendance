@@ -28,7 +28,7 @@ function DayAtt({ day }) {
 }
 
 const Details = (d) => {
-	console.log(d)
+	// console.log(d)
 	if (d.data.error) {
 		Swal.fire({
 			icon: 'error',
@@ -50,7 +50,7 @@ const Details = (d) => {
 }
 
 const Attendance = (d) => {
-	console.log(d)
+	// console.log(d)
 	if (d.data.error || !d.data.overallattperformance) {
 		Swal.fire({
 			icon: 'error',
@@ -177,34 +177,36 @@ export default function Home(props) {
 		})
 
 		setLoading(true)
-		let myRoll = roll
+		let myRoll = null
 
-		try {
-			let rollData = await fetch("/api/rollno", {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json; charset=UTF-8'
-				},
-				body: JSON.stringify({
-					"rollno": roll
+		if(roll.toString().length!==7 && roll.toString().includes("BD")){
+			try {
+				let rollData = await fetch("/api/rollno", {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json; charset=UTF-8'
+					},
+					body: JSON.stringify({
+						"rollno": roll
+					})
 				})
-			})
-			let data = await rollData.json()
-			if (data.error) return Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Something went wrong!',
-			})
-			else {
-				console.log(data)
-				myRoll = data.rollno?data.rollno:myRoll
+				let data = await rollData.json()
+				if (data.error) return Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Something went wrong!',
+				})
+				else {
+					// console.log(data)
+					myRoll = data.rollno
+				}
+			} catch (error) {
+				return Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Something went wrong!',
+				})
 			}
-		} catch (error) {
-			return Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Something went wrong!',
-			})
 		}
 		
 		fetch("/api/https", {
@@ -214,10 +216,10 @@ export default function Home(props) {
 			},
 			body: JSON.stringify({
 				"method": "32",
-				"rollno": myRoll
+				"rollno": myRoll?myRoll:roll
 			})
 		}).then((res) => res.json()).then((data) => {
-			// setLoading(false)
+			setLoading(false)
 			if (data.error) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -252,7 +254,7 @@ export default function Home(props) {
 			},
 			body: JSON.stringify({
 				"method": "314",
-				"rollno": myRoll
+				"rollno": myRoll?myRoll:roll
 			})
 		}).then((res) => res.json()).then((data) => {
 			setLoading(false)
