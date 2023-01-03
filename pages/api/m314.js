@@ -1,5 +1,6 @@
 import connectMongo from '../../utils/connectMongo';
 import Netra from '../../models/netra';
+import axios from 'axios';
 
 async function connect() {
     await connectMongo();
@@ -19,25 +20,21 @@ export default async function handler(req, res) {
                 myRoll = roll.netra
             }
             let start = performance.now()
-            console.log("m32 start", start)
-            var result = await fetch("http://teleuniv.in/netra/api.php", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8'
-                },
-                body: JSON.stringify({
+            console.log("m314 start", start)
+            try {
+                var result = await axios.post("http://teleuniv.in/netra/api.php", {
                     "method": "314",
                     "rollno": myRoll
                 })
-            }).catch(error => {
+                var data = await result.data
+                let end = performance.now()
+                console.log("m314 end", end)
+                console.log("m314", (end-start)/1000)
+                return res.status(200).json(data)
+            } catch (error) {
                 console.log("Internal server error", error)
                 return res.status(500).json({ error: 'Internal Server Error', msg: error })
-            })
-            var data = await result.json()
-            let end = performance.now()
-            console.log("m32 end", end)
-            console.log("m314", (end-start)/1000)
-            return res.status(200).json(data)
+            }            
         } catch (error) {
             console.log(error);
             return res.status(500).json(error)
