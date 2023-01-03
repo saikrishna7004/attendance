@@ -169,7 +169,7 @@ export default function Home(props) {
 		setRoll(e.target.value.toUpperCase().trim())
 	}
 
-	function getAttendance() {
+	async function getAttendance() {
 		if (!roll) return Swal.fire({
 			icon: 'error',
 			title: 'Roll No. Empty',
@@ -177,18 +177,47 @@ export default function Home(props) {
 		})
 
 		setLoading(true)
+		let myRoll = roll
+
+		try {
+			let rollData = await fetch("/api/rollno", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json; charset=UTF-8'
+				},
+				body: JSON.stringify({
+					"rollno": roll
+				})
+			})
+			let data = await rollData.json()
+			if (data.error) return Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Something went wrong!',
+			})
+			else {
+				console.log(data)
+				myRoll = data.rollno?data.rollno:myRoll
+			}
+		} catch (error) {
+			return Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Something went wrong!',
+			})
+		}
 		
-		fetch("/api/m32", {
+		fetch("http://teleuniv.in/netra/api.php", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json; charset=UTF-8'
 			},
 			body: JSON.stringify({
-				// "method": "32",
-				"rollno": roll
+				"method": "32",
+				"rollno": myRoll
 			})
 		}).then((res) => res.json()).then((data) => {
-			setLoading(false)
+			// setLoading(false)
 			if (data.error) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -216,14 +245,14 @@ export default function Home(props) {
 			})
 		})
 
-		fetch("/api/m314", {
+		fetch("http://teleuniv.in/netra/api.php", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json; charset=UTF-8'
 			},
 			body: JSON.stringify({
-				// "method": "314",
-				"rollno": roll
+				"method": "314",
+				"rollno": myRoll
 			})
 		}).then((res) => res.json()).then((data) => {
 			setLoading(false)
