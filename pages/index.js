@@ -207,7 +207,7 @@ export default function Home(props) {
 			})
 		}
 		
-		fetch("http://teleuniv.in/netra/api.php", {
+		fetch("/api/https", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json; charset=UTF-8'
@@ -245,7 +245,7 @@ export default function Home(props) {
 			})
 		})
 
-		fetch("http://teleuniv.in/netra/api.php", {
+		fetch("/api/https", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json; charset=UTF-8'
