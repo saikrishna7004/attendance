@@ -160,9 +160,6 @@ export default function Home(props) {
 			setRoll(c.toUpperCase())
 			getAttendance()
 		}
-		setTimeout(() => {
-			document.getElementById('noticeBtn').click()
-		}, 1000);
 	}, [])
 
 	const handleInputChange = (e) => {
@@ -290,27 +287,7 @@ export default function Home(props) {
 				</div>
 				<Card data={data} attData={attData} loading={loading} />
 				Add your Roll No. <Link href='/netra'><a>Here</a></Link> if your Roll No. is not there
-				<div className="modal fade w-10" id="notice" tabIndex="-1" aria-hidden="true">
-					<div className="modal-dialog modal-xl modal-dialog-scrollable">
-						<div className="modal-content">
-							<div className="modal-header">
-								<h1 className="modal-title fs-5">Notice</h1>
-								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							</div>
-							<div className="modal-body">
-								You may experience some errors while using Astra. Please don&apos;t flood the app. 
-								The app is experiencing lot of requests at a time, which sometimes may result in throwing errors. 
-								Please try again later if you get any error.
-								Give your Feedback <div style={{display: "inline"}} data-bs-dismiss="modal"><Link href='/feedback'><a>Here</a></Link></div> if you have any particular issue.
-							</div>
-							<div className="modal-footer">
-								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
-			Work under progress, please check back tomorrow
 		</>
 	)
 }

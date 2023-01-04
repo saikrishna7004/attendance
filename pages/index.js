@@ -310,7 +310,9 @@ export default function Home(props) {
 					</div>
 				</div>
 			</div> */}
-			Work under progress, please check back tomorrow
+			<div className="container">
+			Work under progress, please check <Link href='/new'><div style={{textDecoration: 'none !important', color: 'black', display: 'inline'}}>back</div></Link> tomorrow
+			</div>
 		</>
 	)
 }
