@@ -135,7 +135,7 @@ const Loading = () => {
 }
 
 export default function Home(props) {
-	const [roll, setRoll] = useState(props.attendanceRollno ? props.attendanceRollno : 2421239)
+	const [roll, setRoll] = useState(props.attendanceRollno ? props.attendanceRollno : 0)
 	const [data, setData] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [attData, setAttData] = useState(null)
