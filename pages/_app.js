@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
 			</a>
 		</Link>
 		<Component {...pageProps} />
-		<footer className="footer-distributed mt-4">
+		{/* <footer className="footer-distributed mt-4">
 			<div className="footer-right">
 				<a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/sai-krishna-karnati/"><FontAwesomeIcon icon={faLinkedinIn} /></a>
 				<a target="_blank" rel="noreferrer" href="https://github.com/saikrishna7004/"><FontAwesomeIcon icon={faGithub} /></a>
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }) {
 				</p>
 				<p>Karnati Sai Krishna &copy; 2022</p>
 			</div>
-		</footer>
+		</footer> */}
 	</>
 }
 
