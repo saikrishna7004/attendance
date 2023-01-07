@@ -310,8 +310,11 @@ export default function Home(props) {
 					</div>
 				</div>
 			</div> */}
-			<div className="container">
-			Work under progress, please check <Link href='/new'><div style={{textDecoration: 'none !important', color: 'black', display: 'inline'}}>back</div></Link> tomorrow
+			<div className="container text-center h-100" style={{verticalAlign: 'center', display: 'flex', transform: 'translateY(25vh)', flexDirection: 'column'}}>
+			<div className='mb-4'>
+			Astra is Temporarily closed due to some issues. Will inform if there are any updates. Hope you understand. 
+			</div>
+			<div><b>Thank you for using Astra <Link href='/new'><div style={{textDecoration: 'none !important', color: 'var(--bs-body-color)', display: 'inline'}}>1.0</div></Link></b></div>
 			</div>
 		</>
 	)
