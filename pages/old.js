@@ -1,3 +1,7 @@
+import Head from 'next/head'
+import Script from 'next/script'
+import Image from 'next/image'
+import styles from '../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2'
@@ -7,7 +11,6 @@ import { faCircle, faCircleCheck, faCircleXmark } from '@fortawesome/free-regula
 import cookie from 'js-cookie'
 import ContentLoader, { Facebook } from 'react-content-loader'
 import Link from 'next/link'
-import axios from 'axios'
 
 library.add(faCircle, faCircleCheck, faCircleXmark)
 config.familyPrefix = "far"
@@ -132,32 +135,35 @@ const Loading = () => {
 }
 
 export default function Home(props) {
-	const [roll, setRoll] = useState(props.attendanceRollno ? props.attendanceRollno : 0)
+	const [roll, setRoll] = useState(props.attendanceRollno ? props.attendanceRollno : 2421239)
 	const [data, setData] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [attData, setAttData] = useState(null)
-	useEffect(() => {
-		function getCookie(cname) {
-			let name = cname + "=";
-			let decodedCookie = decodeURIComponent(document.cookie);
-			let ca = decodedCookie.split(';');
-			for (let i = 0; i < ca.length; i++) {
-				let c = ca[i];
-				while (c.charAt(0) == ' ') {
-					c = c.substring(1);
-				}
-				if (c.indexOf(name) == 0) {
-					return c.substring(name.length, c.length);
-				}
-			}
-			return "";
-		}
-		let c = getCookie('attendance-rollno')
-		if (c) {
-			setRoll(c.toUpperCase())
-			getAttendance()
-		}
-	}, [])
+	// useEffect(() => {
+	// 	function getCookie(cname) {
+	// 		let name = cname + "=";
+	// 		let decodedCookie = decodeURIComponent(document.cookie);
+	// 		let ca = decodedCookie.split(';');
+	// 		for (let i = 0; i < ca.length; i++) {
+	// 			let c = ca[i];
+	// 			while (c.charAt(0) == ' ') {
+	// 				c = c.substring(1);
+	// 			}
+	// 			if (c.indexOf(name) == 0) {
+	// 				return c.substring(name.length, c.length);
+	// 			}
+	// 		}
+	// 		return "";
+	// 	}
+	// 	let c = getCookie('attendance-rollno')
+	// 	if (c) {
+	// 		setRoll(c.toUpperCase())
+	// 		getAttendance()
+	// 	}
+	// 	setTimeout(() => {
+	// 		document.getElementById('noticeBtn').click()
+	// 	}, 1000);
+	// }, [])
 
 	const handleInputChange = (e) => {
 		setRoll(e.target.value.toUpperCase().trim())
@@ -202,21 +208,18 @@ export default function Home(props) {
 				})
 			}
 		}
-
-        try {
-            var result = await fetch("/teleapi/netra/api.php", {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					"method": "32",
-					"rollno": myRoll?myRoll:roll
-				})
+		
+		fetch("/api/https", {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json; charset=UTF-8'
+			},
+			body: JSON.stringify({
+				"method": "32",
+				"rollno": myRoll?myRoll:roll
 			})
-            var data = await result.json()
-            // console.log(data)
-            setLoading(false)
+		}).then((res) => res.json()).then((data) => {
+			setLoading(false)
 			if (data.error) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -235,32 +238,27 @@ export default function Home(props) {
 				// console.log(data)
 				setData(data)
 			}
-        } catch (error) {
-            // console.log(error);
+		}).catch((e) => {
 			setLoading(false)
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
 				text: 'Something went wrong!',
 			})
-        }
+		})
 
-        try {
-            var result = await fetch("/teleapi/netra/api.php", {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					"method": "314",
-					"rollno": myRoll?myRoll:roll
-				})
+		fetch("/api/https", {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json; charset=UTF-8'
+			},
+			body: JSON.stringify({
+				"method": "314",
+				"rollno": myRoll?myRoll:roll
 			})
-			console.log(result)
-            var data = await result.json()
-            console.log(data)
-            setLoading(false)
-			if (data.error) return Swal.fire({
+		}).then((res) => res.json()).then((data) => {
+			setLoading(false)
+			if (data.error || !data.overallattperformance) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
 				text: 'Something went wrong!',
@@ -269,29 +267,54 @@ export default function Home(props) {
 				// console.log(data)
 				setAttData(data)
 			}
-        } catch (error) {
-            // console.log(error);
+		}).catch((e) => {
 			setLoading(false)
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
 				text: 'Something went wrong!',
 			})
-        }
+		})
 	}
 
 	return (
 		<>
-			<div className="container">
+			{/* <div className="container">
 				<div className="mb-3 mt-1 d-flex" style={{ flexFlow: 'wrap' }}>
 					<label htmlFor="rollno" className="form-label col-auto mt-3 me-2">Roll No.</label>
 					<input type="text" onChange={handleInputChange} style={{ textTransform: 'capitalize' }} className="form-control w-auto col-auto me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event) => { if (event.keyCode == 13) { getAttendance() } }} />
 					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={getAttendance}>Fetch</button>
 					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={() => { cookie.set('attendance-rollno', roll, { expires: 300 }) }}>Remember Me</button>
+					<button className="btn btn-primary me-2 mt-2" data-bs-toggle="modal" data-bs-target="#notice" id="noticeBtn">Notice</button>
 					<Link href='/feedback'><a className="btn btn-primary me-2 mt-2">Feedback</a></Link>
 				</div>
 				<Card data={data} attData={attData} loading={loading} />
 				Add your Roll No. <Link href='/netra'><a>Here</a></Link> if your Roll No. is not there
+				<div className="modal fade w-10" id="notice" tabIndex="-1" aria-hidden="true">
+					<div className="modal-dialog modal-xl modal-dialog-scrollable">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h1 className="modal-title fs-5">Notice</h1>
+								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div className="modal-body">
+								You may experience some errors while using Astra. Please don&apos;t flood the app. 
+								The app is experiencing lot of requests at a time, which sometimes may result in throwing errors. 
+								Please try again later if you get any error.
+								Give your Feedback <div style={{display: "inline"}} data-bs-dismiss="modal"><Link href='/feedback'><a>Here</a></Link></div> if you have any particular issue.
+							</div>
+							<div className="modal-footer">
+								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> */}
+			<div className="container text-center h-100" style={{verticalAlign: 'center', display: 'flex', transform: 'translateY(25vh)', flexDirection: 'column'}}>
+			<div className='mb-4'>
+			Astra is Temporarily closed due to some issues. Will inform if there are any updates. Hope you understand. 
+			</div>
+			<div><b>Thank you for using Astra <Link href='/new'><div style={{textDecoration: 'none !important', color: 'var(--bs-body-color)', display: 'inline'}}>1.0</div></Link></b></div>
 			</div>
 		</>
 	)
