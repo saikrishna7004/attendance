@@ -1,7 +1,3 @@
-import Head from 'next/head'
-import Script from 'next/script'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2'
@@ -11,6 +7,7 @@ import { faCircle, faCircleCheck, faCircleXmark } from '@fortawesome/free-regula
 import cookie from 'js-cookie'
 import ContentLoader, { Facebook } from 'react-content-loader'
 import Link from 'next/link'
+import axios from 'axios'
 
 library.add(faCircle, faCircleCheck, faCircleXmark)
 config.familyPrefix = "far"
@@ -194,7 +191,7 @@ export default function Home(props) {
 					text: 'Something went wrong!',
 				})
 				else {
-					// console.log(data)
+					console.log(data)
 					myRoll = data.rollno
 				}
 			} catch (error) {
@@ -205,18 +202,21 @@ export default function Home(props) {
 				})
 			}
 		}
-		
-		fetch("/api/https", {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json; charset=UTF-8'
-			},
-			body: JSON.stringify({
-				"method": "32",
-				"rollno": myRoll?myRoll:roll
+
+        try {
+            var result = await fetch("/teleapi/netra/api.php", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					"method": "32",
+					"rollno": myRoll?myRoll:roll
+				})
 			})
-		}).then((res) => res.json()).then((data) => {
-			setLoading(false)
+            var data = await result.json()
+            console.log(data)
+            setLoading(false)
 			if (data.error) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -235,27 +235,26 @@ export default function Home(props) {
 				// console.log(data)
 				setData(data)
 			}
-		}).catch((e) => {
-			setLoading(false)
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Something went wrong!',
-			})
-		})
+        } catch (error) {
+            console.log(error);
+        }
 
-		fetch("/api/https", {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json; charset=UTF-8'
-			},
-			body: JSON.stringify({
-				"method": "314",
-				"rollno": myRoll?myRoll:roll
+        try {
+            var result = await fetch("/teleapi/netra/api.php", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					"method": "314",
+					"rollno": myRoll?myRoll:roll
+				})
 			})
-		}).then((res) => res.json()).then((data) => {
-			setLoading(false)
-			if (data.error || !data.overallattperformance) return Swal.fire({
+			console.log(result)
+            var data = await result.json()
+            console.log(data)
+            setLoading(false)
+			if (data.error) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
 				text: 'Something went wrong!',
@@ -264,14 +263,9 @@ export default function Home(props) {
 				// console.log(data)
 				setAttData(data)
 			}
-		}).catch((e) => {
-			setLoading(false)
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Something went wrong!',
-			})
-		})
+        } catch (error) {
+            console.log(error);
+        }
 	}
 
 	return (
