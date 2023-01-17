@@ -137,26 +137,29 @@ export default function Home(props) {
 	const [loading, setLoading] = useState(false)
 	const [attData, setAttData] = useState(null)
 	useEffect(() => {
-		function getCookie(cname) {
-			let name = cname + "=";
-			let decodedCookie = decodeURIComponent(document.cookie);
-			let ca = decodedCookie.split(';');
-			for (let i = 0; i < ca.length; i++) {
-				let c = ca[i];
-				while (c.charAt(0) == ' ') {
-					c = c.substring(1);
+		new Swal('I am Back', '<b>KMIT ASTRA 1.0</b> is back with a bang. But don\'t bang this site with requests. Give a delay before your next request.', 'info').then(res=>{
+			console.log(res)
+			function getCookie(cname) {
+				let name = cname + "=";
+				let decodedCookie = decodeURIComponent(document.cookie);
+				let ca = decodedCookie.split(';');
+				for (let i = 0; i < ca.length; i++) {
+					let c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
 				}
-				if (c.indexOf(name) == 0) {
-					return c.substring(name.length, c.length);
-				}
+				return "";
 			}
-			return "";
-		}
-		let c = getCookie('attendance-rollno')
-		if (c) {
-			setRoll(c.toUpperCase())
-			getAttendance()
-		}
+			let c = getCookie('attendance-rollno')
+			if (c) {
+				setRoll(c.toUpperCase())
+				getAttendance()
+			}
+		})
 	}, [])
 
 	const handleInputChange = (e) => {
