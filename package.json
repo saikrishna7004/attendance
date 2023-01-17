@@ -31,5 +31,6 @@
     "eslint": "8.26.0",
     "eslint-config-next": "12.3.1"
   },
-  "proxy": "http://teleuniv.in"
+  "proxy": "http://teleuniv.in",
+  "http-proxy-middleware": "^1.0.5"
 }

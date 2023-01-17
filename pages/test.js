@@ -204,7 +204,7 @@ export default function Home(props) {
 		}
 
         try {
-            var result = await fetch("/netra/api.php", {
+            var result = await fetch("/teleapi/netra/api.php", {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -240,7 +240,7 @@ export default function Home(props) {
         }
 
         try {
-            var result = await fetch("/netra/api.php", {
+            var result = await fetch("/teleapi/netra/api.php", {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
