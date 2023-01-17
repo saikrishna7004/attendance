@@ -204,11 +204,17 @@ export default function Home(props) {
 		}
 
         try {
-            var result = await axios.post("http://teleuniv.in/netra/api.php", {
-				"method": "32",
-				"rollno": myRoll?myRoll:roll
+            var result = await fetch("/netra/api.php", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					"method": "32",
+					"rollno": myRoll?myRoll:roll
+				})
 			})
-            var data = await result.data
+            var data = await result.json()
             console.log(data)
             setLoading(false)
 			if (data.error) return Swal.fire({
@@ -234,11 +240,18 @@ export default function Home(props) {
         }
 
         try {
-            var result = await axios.post("http://teleuniv.in/netra/api.php", {
-				"method": "314",
-				"rollno": myRoll?myRoll:roll
+            var result = await fetch("/netra/api.php", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					"method": "314",
+					"rollno": myRoll?myRoll:roll
+				})
 			})
-            var data = await result.data
+			console.log(result)
+            var data = await result.json()
             console.log(data)
             setLoading(false)
 			if (data.error) return Swal.fire({
