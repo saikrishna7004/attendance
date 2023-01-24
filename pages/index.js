@@ -290,7 +290,7 @@ export default function Home(props) {
 					<label htmlFor="rollno" className="form-label col-auto mt-3 me-2">Roll No.</label>
 					<input type="text" onChange={handleInputChange} style={{ textTransform: 'capitalize' }} className="form-control w-auto col-auto me-2 mt-2" id="rollno" name="rollno" placeholder="Roll No." value={roll} onKeyUp={(event) => { if (event.keyCode == 13) { getAttendance() } }} />
 					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={getAttendance}>Fetch</button>
-					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={() => { cookie.set('attendance-rollno', roll, { expires: 300 }) }}>Remember Me</button>
+					<button className="btn btn-primary me-2 mt-2" style={{ marginBottom: '1px' }} onClick={() => { cookie.set('attendance-rollno', roll, { expires: 300 }); new Swal('Successfully Saved', 'Your Roll No. has been saved successfully in your browser. You need not enter your Roll No. next time.', 'success') }}>Remember Me</button>
 					<Link href='/feedback'><a className="btn btn-primary me-2 mt-2">Feedback</a></Link>
 				</div>
 				<Card data={data} attData={attData} loading={loading} />
