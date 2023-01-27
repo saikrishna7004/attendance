@@ -137,7 +137,7 @@ export default function Home(props) {
 	const [loading, setLoading] = useState(false)
 	const [attData, setAttData] = useState(null)
 	useEffect(() => {
-		new Swal('Feedback', 'KMIT Astra 1.0 works with your valuable Feedback. Please fill this Form to make Astra better. <a href="https://forms.gle/nF543TULAMdyRtha9">https://forms.gle/nF543TULAMdyRtha9</a>', 'info').then(res=>{
+		new Swal('Feedback', 'KMIT Astra 1.0 works with your valuable Feedback. Please fill this Form to make Astra better. <a target="_blank" href="https://forms.gle/nF543TULAMdyRtha9">https://forms.gle/nF543TULAMdyRtha9</a>', 'info').then(res=>{
 			function getCookie(cname) {
 				let name = cname + "=";
 				let decodedCookie = decodeURIComponent(document.cookie);
