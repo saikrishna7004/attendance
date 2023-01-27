@@ -137,7 +137,7 @@ export default function Home(props) {
 	const [loading, setLoading] = useState(false)
 	const [attData, setAttData] = useState(null)
 	useEffect(() => {
-		// new Swal('I am Back', '<b>KMIT ASTRA 1.0</b> is back with a bang. But don\'t bang this site with requests. Give a delay before your next request.', 'info').then(res=>{
+		new Swal('Feedback', 'KMIT Astra 1.0 works with your valuable Feedback. Please fill this Form to make Astra better. <a href="https://forms.gle/nF543TULAMdyRtha9"></a>', 'info').then(res=>{
 			function getCookie(cname) {
 				let name = cname + "=";
 				let decodedCookie = decodeURIComponent(document.cookie);
@@ -158,7 +158,7 @@ export default function Home(props) {
 				setRoll(c.toUpperCase())
 				getAttendance()
 			}
-		// })
+		})
 	}, [])
 
 	const handleInputChange = (e) => {
