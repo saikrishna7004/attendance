@@ -5,7 +5,7 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					<meta name="description" content="Website made by Sai Krishna Karnati using Next.js, React.js and Strapi" />
+					<meta name="description" content="An application to track your attendance for KMITians without Netra or Sanjaya" />
 					<link rel="manifest" href="/manifest.json" />
 					<link rel="apple-touch-icon" href="/logo.png"></link>
 					<meta name="theme-color" content="#50e3c2" />
