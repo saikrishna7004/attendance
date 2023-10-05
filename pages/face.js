@@ -135,7 +135,7 @@ const Face = () => {
             <div className="row mt-3">
                 {roll.map((e, i) => (
                     <div className="col-md-3" key={i}>
-                        <img style={{ height: '300px', display: 'inline' }} src={`http://teleuniv.in/sanjaya/student-images/${e}.jpg`} alt={e} /><br/>
+                        <img style={{ height: '300px', display: 'inline' }} src={`https://images.weserv.nl/?url=teleuniv.in/sanjaya/student-images/${e}.jpg`} alt={e} /><br/>
                         {e}
                     </div>
                 ))}
