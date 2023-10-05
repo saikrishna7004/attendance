@@ -6,13 +6,14 @@ const Face = () => {
         year: '21',
         entryType: '1A',
         branchCode: '05',
-        section: 'A'
+        section: '--'
     });
 
     const { year, entryType, branchCode, section } = formData;
 
     useEffect(() => {
         const generatedRolls = [];
+        if(section=='--') return;
 
         const validLastCharacters = "0123456789ABCDEFGHJKLMNPQRTUVWXYZ"; // Excluding I, O, S
         const validLastCharacters2 = "0123456789";
@@ -93,10 +94,10 @@ const Face = () => {
     };
 
     const sectionOptions = {
-        '05': ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
-        '66': ['A', 'B', 'C'],
-        '12': ['A', 'B'],
-        '67': ['A']
+        '05': ['--', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        '66': ['--', 'A', 'B', 'C'],
+        '12': ['--', 'A', 'B'],
+        '67': ['--', 'A']
     };    
     const branchOptions = {'CSE': '05', 'CSM': '66', 'IT': '12', 'CSD': '67'};
 
