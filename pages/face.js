@@ -5,7 +5,7 @@ const Face = () => {
     const [formData, setFormData] = useState({
         year: '21',
         entryType: '1A',
-        branchCode: '05',
+        branchCode: '--',
         section: '--'
     });
 
@@ -13,7 +13,7 @@ const Face = () => {
 
     useEffect(() => {
         const generatedRolls = [];
-        if(section=='--') return;
+        if(section=='--'|| branchCode=='--') return;
 
         const validLastCharacters = "0123456789ABCDEFGHJKLMNPQRTUVWXYZ"; // Excluding I, O, S
         const validLastCharacters2 = "0123456789";
@@ -97,9 +97,10 @@ const Face = () => {
         '05': ['--', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
         '66': ['--', 'A', 'B', 'C'],
         '12': ['--', 'A', 'B'],
-        '67': ['--', 'A']
+        '67': ['--', 'A'],
+        '--': []
     };    
-    const branchOptions = {'CSE': '05', 'CSM': '66', 'IT': '12', 'CSD': '67'};
+    const branchOptions = {'CSE': '05', 'CSM': '66', 'IT': '12', 'CSD': '67', '--': ''};
 
     return (
         <div className="container mt-5">
