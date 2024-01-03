@@ -13,7 +13,7 @@ library.add(faCircle, faCircleCheck, faCircleXmark)
 config.familyPrefix = "far"
 
 function Circle({ num }) {
-	if (num == '2') return <FontAwesomeIcon icon={faCircle} />
+	if (num == '2') return <FontAwesomeIcon icon={faCircle} className='blank-circle' />
 	else if (num == '1') return <FontAwesomeIcon icon={faCircleCheck} color={'green'} />
 	else if (num == '0') return <FontAwesomeIcon icon={faCircleXmark} color={'red'} />
 }
@@ -65,18 +65,17 @@ const Attendance = (d) => {
 			<span className="col-7"><DayAtt day={d.data.attandance.dayobjects[0].sessions} /></span>
 		</div>
 		<h3 className="my-3">Last 2 Weeks</h3>
-		<table className="my-3" style={{width: '100%'}}>
-			<tbody>
-				<tr>
-					<td style={{textAlign: 'right'}}><Circle num='1' /></td>
-					<td>{d.data.attandance.twoweeksessions.present}</td>
-					<td style={{textAlign: 'right'}}><Circle num='0' /></td>
-					<td>{d.data.attandance.twoweeksessions.absent}</td>
-					<td style={{textAlign: 'right'}}><Circle num='2' /></td>
-					<td>{d.data.attandance.twoweeksessions.nosessions}</td>
-				</tr>
-			</tbody>
-		</table>
+		<div className="row my-3 ps-3" style={{ width: '100%' }}>
+			<div className="col-4 text-center">
+				<Circle num='1' />&nbsp;{d.data.attandance.twoweeksessions.present}
+			</div>
+			<div className="col-4 text-center">
+				<Circle num='0' />&nbsp;{d.data.attandance.twoweeksessions.absent}
+			</div>
+			<div className="col-4 text-center">
+				<Circle num='2' />&nbsp;{d.data.attandance.twoweeksessions.nosessions}
+			</div>
+		</div>
 		{
 
 		}
@@ -99,13 +98,13 @@ const Attendance = (d) => {
 				{
 					d.data.overallattperformance.overall.map((e, i) => {
 						return <tr key={i}>
-							<td>{e.subjectname}</td>
+							<td className='td-custom'>{e.subjectname}</td>
 							<td style={{ color: (e.colorcode1 ? e.colorcode1 : e.colorcode2) }}>{(e.percentage != '--') ? e.percentage : e.practical}</td>
 						</tr>
 					})
 				}
 				<tr key={100}>
-					<td><b>Overall</b></td>
+					<td className='td-custom'><b>Overall</b></td>
 					<td style={{ color: d.data.overallattperformance.colorcode }}>{d.data.overallattperformance.totalpercentage}</td>
 				</tr>
 			</tbody>
@@ -136,27 +135,39 @@ export default function Home(props) {
 	const [data, setData] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [attData, setAttData] = useState(null)
-	useEffect(() => {
-		new Swal('Feedback', 'KMIT Astra 1.0 works with your valuable Feedback. Please fill this Form to make Astra better. <a target="_blank" href="https://forms.gle/nF543TULAMdyRtha9">https://forms.gle/nF543TULAMdyRtha9</a>', 'info').then(res=>{
-			function getCookie(cname) {
-				let name = cname + "=";
-				let decodedCookie = decodeURIComponent(document.cookie);
-				let ca = decodedCookie.split(';');
-				for (let i = 0; i < ca.length; i++) {
-					let c = ca[i];
-					while (c.charAt(0) == ' ') {
-						c = c.substring(1);
+	useEffect(() => {	
+		Swal.fire({
+			title: 'Instructions',
+			html: `
+				<p style="line-height: 1.5;">Please visit the <a href="/instructions" target="_blank">Instructions Page</a> to get detailed instructions based on the feedbacks we recieved.</p>
+			`,
+			icon: 'info',
+			showConfirmButton: true,
+			allowEscapeKey: false,
+			allowOutsideClick: false,
+			showCancelButton: false,
+			confirmButtonText: 'OK',
+			willClose: () => {
+				function getCookie(cname) {
+					let name = cname + "=";
+					let decodedCookie = decodeURIComponent(document.cookie);
+					let ca = decodedCookie.split(';');
+					for (let i = 0; i < ca.length; i++) {
+						let c = ca[i];
+						while (c.charAt(0) == ' ') {
+							c = c.substring(1);
+						}
+						if (c.indexOf(name) == 0) {
+							return c.substring(name.length, c.length);
+						}
 					}
-					if (c.indexOf(name) == 0) {
-						return c.substring(name.length, c.length);
-					}
+					return "";
 				}
-				return "";
-			}
-			let c = getCookie('attendance-rollno')
-			if (c) {
-				setRoll(c.toUpperCase())
-				getAttendance()
+				let c = getCookie('attendance-rollno')
+				if (c) {
+					setRoll(c.toUpperCase())
+					getAttendance()
+				}
 			}
 		})
 	}, [])
@@ -175,7 +186,7 @@ export default function Home(props) {
 		setLoading(true)
 		let myRoll = null
 
-		if(roll.toString().length!==7 && roll.toString().includes("BD")){
+		if (roll.toString().length !== 7 && roll.toString().includes("BD")) {
 			try {
 				let rollData = await fetch("/api/rollno", {
 					method: 'POST',
@@ -205,20 +216,20 @@ export default function Home(props) {
 			}
 		}
 
-        try {
-            var result = await fetch("/teleapi/netra/api.php", {
+		try {
+			var result = await fetch("/teleapi/netra/api.php", {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
 					"method": "32",
-					"rollno": myRoll?myRoll:roll
+					"rollno": myRoll ? myRoll : roll
 				})
 			})
-            var data = await result.json()
-            // console.log(data)
-            setLoading(false)
+			var data = await result.json()
+			// console.log(data)
+			setLoading(false)
 			if (data.error) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -237,31 +248,31 @@ export default function Home(props) {
 				// console.log(data)
 				setData(data)
 			}
-        } catch (error) {
-            // console.log(error);
+		} catch (error) {
+			// console.log(error);
 			setLoading(false)
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
 				text: 'Something went wrong!',
 			})
-        }
+		}
 
-        try {
-            var result = await fetch("/teleapi/netra/api.php", {
+		try {
+			var result = await fetch("/teleapi/netra/api.php", {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
 					"method": "314",
-					"rollno": myRoll?myRoll:roll
+					"rollno": myRoll ? myRoll : roll
 				})
 			})
 			console.log(result)
-            var data = await result.json()
-            console.log(data)
-            setLoading(false)
+			var data = await result.json()
+			console.log(data)
+			setLoading(false)
 			if (data.error) return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -271,15 +282,15 @@ export default function Home(props) {
 				// console.log(data)
 				setAttData(data)
 			}
-        } catch (error) {
-            // console.log(error);
+		} catch (error) {
+			// console.log(error);
 			setLoading(false)
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
 				text: 'Something went wrong!',
 			})
-        }
+		}
 	}
 
 	return (

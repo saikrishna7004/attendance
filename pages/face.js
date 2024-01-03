@@ -11,7 +11,7 @@ const Face = () => {
 
     const { year, entryType, branchCode, section } = formData;
 
-    useEffect(() => {
+    const generate = () => {
         const generatedRolls = [];
         if(section=='--'|| branchCode=='--') return;
 
@@ -86,7 +86,7 @@ const Face = () => {
             }
         }
         setRoll(generatedRolls);
-    }, [formData]);
+    }
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -98,9 +98,9 @@ const Face = () => {
         '66': ['--', 'A', 'B', 'C'],
         '12': ['--', 'A', 'B'],
         '67': ['--', 'A'],
-        '--': []
+        '--': ['--']
     };    
-    const branchOptions = {'CSE': '05', 'CSM': '66', 'IT': '12', 'CSD': '67', '--': ''};
+    const branchOptions = {'CSE': '05', 'CSM': '66', 'IT': '12', 'CSD': '67', '--': '--'};
 
     return (
         <div className="container mt-5">
@@ -132,6 +132,9 @@ const Face = () => {
                             </option>
                         ))}
                     </select>
+                </div>
+                <div className="col-md-3">
+                    <button className="btn btn-primary my-3" onClick={generate}>Submit</button>
                 </div>
             </div>
             <div className="row mt-3">

@@ -24,9 +24,9 @@ function MyApp({ Component, pageProps }) {
 		<Script src="sweetalert2/sweetalert2.min.js"></Script>
 		<Link href="/" >
 			<a style={{textDecoration: 'none'}}>
-				<div style={{ background: 'rgb(230, 230, 230)' }} className="mb-2 py-2 d-flex justify-content-center">
+				<div className="mb-2 py-2 d-flex justify-content-center header">
 					<img src="/logo.png" alt="Logo" style={{ height: '50px' }} />
-					<h2 className='mt-2 ms-1 text-dark'>KMIT Astra</h2>
+					<h2 className='mt-2 ms-1'>KMIT Astra</h2>
 				</div>
 			</a>
 		</Link>
