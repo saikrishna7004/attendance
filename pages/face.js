@@ -123,7 +123,7 @@ const Face = () => {
                     <label>Branch Code:</label>
                     <select className="form-control" name="branchCode" value={branchCode} onChange={handleInputChange}>
                         {Object.keys(branchOptions).map((branch, i) => (
-                            <option key={i} value={branchOptions[branch]}>
+                            <option key={i+"branch"} value={branchOptions[branch]}>
                                 {branch}
                             </option>
                         ))}
@@ -133,7 +133,7 @@ const Face = () => {
                     <label>Section:</label>
                     <select className="form-control" name="section" value={section} onChange={handleInputChange}>
                         {sectionOptions[branchCode]?.map((option, i) => (
-                            <option key={i} value={option}>
+                            <option key={i+"section"} value={option}>
                                 {option}
                             </option>
                         ))}
