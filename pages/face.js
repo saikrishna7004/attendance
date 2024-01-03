@@ -1,3 +1,4 @@
+'use strict';
 import React, { useState, useEffect } from 'react';
 
 const Face = () => {
@@ -10,6 +11,11 @@ const Face = () => {
     });
 
     const { year, entryType, branchCode, section } = formData;
+
+    useEffect(() => {
+        console.log(formData)
+    }, [formData])
+    
 
     const generate = () => {
         const generatedRolls = [];
@@ -116,8 +122,8 @@ const Face = () => {
                 <div className="col-md-3">
                     <label>Branch Code:</label>
                     <select className="form-control" name="branchCode" value={branchCode} onChange={handleInputChange}>
-                        {Object.keys(branchOptions).map((branch) => (
-                            <option key={branchOptions[branch]} value={branchOptions[branch]}>
+                        {Object.keys(branchOptions).map((branch, i) => (
+                            <option key={i} value={branchOptions[branch]}>
                                 {branch}
                             </option>
                         ))}
@@ -126,8 +132,8 @@ const Face = () => {
                 <div className="col-md-3">
                     <label>Section:</label>
                     <select className="form-control" name="section" value={section} onChange={handleInputChange}>
-                        {sectionOptions[branchCode]?.map((option) => (
-                            <option key={option} value={option}>
+                        {sectionOptions[branchCode]?.map((option, i) => (
+                            <option key={i} value={option}>
                                 {option}
                             </option>
                         ))}
