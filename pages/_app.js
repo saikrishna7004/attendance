@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faInstagram, faLinkedin, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import 'bootstrap/dist/css/bootstrap.css'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 library.add(faGithub, faInstagram, faLinkedin)
 config.familyPrefix = "fa"
@@ -15,6 +15,23 @@ function MyApp({ Component, pageProps }) {
 	useEffect(() => {
 		import("bootstrap/dist/js/bootstrap.bundle");
 	}, []);
+
+	const [isAppEnabled, setAppEnabled] = useState(false);
+
+	useEffect(() => {
+		const isAppEnabled = process.env.NEXT_PUBLIC_APP_ENABLED === 'true';
+		setAppEnabled(isAppEnabled);
+	}, []);
+
+	if (!isAppEnabled) {
+		return (
+			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
+				<h1>Under Maintenance</h1><br />
+				<p>Check back later</p>
+			</div>
+		);
+	}
+
 	return <>
 		<Head>
 			<title>KMIT Astra - Attendance Tracker </title>
